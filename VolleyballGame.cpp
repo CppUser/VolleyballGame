@@ -1,6 +1,7 @@
 #include <sstream>
 #include<SFML\Graphics.hpp>
 #include "GameComponents\Player.h"
+#include "GameComponents\Ball.h"
 using namespace sf;
 
 
@@ -17,13 +18,13 @@ int main() {
 	Player player(1920/2,1080-20);
 
 	//Ball Section
-
+	Ball ball(1920 / 2,0);
 	//Create a TExt object called HUD
 	Text Hud;
 
 	//Font
 	Font font;
-	font.loadFromFile("resources/Fonts/Kindness.ttf");
+	font.loadFromFile("resources/Fonts/KrunchBold.ttf");
 	Hud.setFont(font);
 	Hud.setCharacterSize(75);
 	Hud.setFillColor(Color::White);
@@ -81,10 +82,10 @@ int main() {
 		Time dt = clock.restart();
 
 		player.update(dt);
-
+		ball.update(dt);
 		//Update the HUD text
 		std::stringstream ss;
-		ss << "Score:" << "   Lives:" << lives;
+		ss << "Score: " <<score<< "   Lives: " << lives;
 		Hud.setString(ss.str());
 
 		
@@ -97,6 +98,7 @@ int main() {
 		window.clear();
 		window.draw(Hud);
 		window.draw(player.getShape());
+		window.draw(ball.getShape());
 
 		window.display();
 

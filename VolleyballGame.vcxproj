@@ -80,10 +80,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="GameComponents\Ball.cpp" />
     <ClCompile Include="GameComponents\Player.cpp" />
     <ClCompile Include="VolleyballGame.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="GameComponents\Ball.h" />
     <ClInclude Include="GameComponents\Player.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
