@@ -4,6 +4,9 @@
 #include "GameComponents\Ball.h"
 using namespace sf;
 
+//TODO: Polish game add sprites to class make like it real volleyball
+
+
 
 int main() {
 
@@ -87,6 +90,44 @@ int main() {
 		std::stringstream ss;
 		ss << "Score: " <<score<< "   Lives: " << lives;
 		Hud.setString(ss.str());
+
+		//Handling Ball Hittig the bottom
+		if (ball.getPosition().top > window.getSize().y)
+		{
+			//Reverse ball direction
+			ball.reboundBottom();
+
+			//Remove life
+			lives--;
+
+			//check if no life left
+			if (lives<1)
+			{
+				//reset the score
+				score = 0;
+				//reset the lives
+				lives = 3;
+			}
+		}
+		//Handle the ball hitting top
+		if (ball.getPosition().top <0)
+		{
+			ball.reboundPlayerOrTop();
+
+			//addpoint to the player
+			score++;
+		}
+		//Handle the ball hitting sides
+		if (ball.getPosition().left < 0 || ball.getPosition().left + ball.getPosition().width > window.getSize().x)
+		{
+			ball.reboundSides();
+		}
+		// Has the ball hit the player
+		if (ball.getPosition().intersects(player.getPosition()))
+		{
+			//Hit Detected reverse the ball and score a point
+			ball.reboundPlayerOrTop();
+		}
 
 		
 		/*
